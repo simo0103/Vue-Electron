@@ -2,28 +2,18 @@
   <div id="wrapper">
     
     <main>
-     
+     <h1>HELLO WORLD!</h1>
     </main>
   </div>
 </template>
 
 <script>
- // import SystemInformation from './LandingPage/SystemInformation'
 
-  // export default {
-  //   name: 'landing-page',
-  //   components: { SystemInformation },
-  //   methods: {
-  //     open (link) {
-  //       this.$electron.shell.openExternal(link)
-  //     }
-  //   }
-  // }
 </script>
 
 <style>
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
+  @import "../components/style/home.scss";
   * {
     box-sizing: border-box;
     margin: 0;
