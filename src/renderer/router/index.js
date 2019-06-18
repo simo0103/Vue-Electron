@@ -12,9 +12,9 @@ export default new Router({
       component: require('@/components/Home').default
     },
     {
-      path: '/profile',
-      name: 'profile',
-      component: require('@/components/User/Profile').default
+      path: '/calendar',
+      name: 'calendar',
+      component: require('@/components/Calendar/Calendar').default
     },
     {
       path: '/resoconto',
