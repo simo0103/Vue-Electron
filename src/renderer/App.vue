@@ -15,7 +15,7 @@ import Navigation from './components/Utils/Navigation'
   }
 </script>
 
-<style>
+<style lang="scss">
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
   * {
@@ -39,6 +39,7 @@ import Navigation from './components/Utils/Navigation'
       height: 100vh;
   }
   #app {
-    height: 100vh;
+    display: flex;
+
   }
 </style>

@@ -16,7 +16,7 @@
   @import "../style/home.scss";
 
   #wrapper {
-  
+    width: 100vw;
   }
 
   main {
