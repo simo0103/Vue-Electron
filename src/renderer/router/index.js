@@ -11,6 +11,16 @@ export default new Router({
       component: require('@/components/Home').default
     },
     {
+      path: '/profile',
+      name: 'profile',
+      component: require('@/components/User/Profile').default
+    },
+    {
+      path: '/resoconto',
+      name: 'resoconto',
+      component: require('@/components/Expenses/Resoconto').default
+    },
+    {
       path: '*',
       redirect: '/'
     }
