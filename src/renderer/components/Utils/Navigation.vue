@@ -1,18 +1,16 @@
-<template>
-    <div>
-       <nav>
-           <router-link to="/home">Home</router-link>
-           <router-link to="/profile">Profile</router-link>
-           <router-link to="/resoconto">Resoconto</router-link>
-       </nav>
-    </div>
+<template> 
+    <nav>
+        <router-link class="link" to="/" exact>Home</router-link>
+        <router-link class="link" to="/profile">Profile</router-link>
+        <router-link class="link" to="/resoconto">Resoconto</router-link>
+    </nav>   
 </template>
 <script>
 export default {
-  name: 'Navigation'
-  
+  name: 'Navigation'  
 }
 </script>
-<style>
+<style lang="scss">
 @import "../../style/navigation.scss";
+
 </style>

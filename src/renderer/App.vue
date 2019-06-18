@@ -23,6 +23,9 @@ import Navigation from './components/Utils/Navigation'
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
      
   }
   body {
@@ -34,5 +37,8 @@ import Navigation from './components/Utils/Navigation'
         );
       width: 100vw;
       height: 100vh;
+  }
+  #app {
+    height: 100vh;
   }
 </style>
