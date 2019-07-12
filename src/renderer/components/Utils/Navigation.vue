@@ -11,7 +11,6 @@
             </router-link>
         
             <router-link tag="li" class="link" to="/resoconto">
-                <font-awesome-icon icon="home"></font-awesome-icon>
                 <span class="link-text">Resoconto</span>
             </router-link>
                  
