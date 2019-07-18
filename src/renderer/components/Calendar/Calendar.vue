@@ -1,7 +1,7 @@
 <template>
     <div class="calendar">
         <h1>CALENDAR</h1>
-        <h2>{{ new Date().getFullYear() }}</h2>
+        <h2>{{currentData}}</h2>
         <ul>
           <!-- <li v-bind:key="year" v-for="year in years" :value="year">{{ year }}</li> -->
         </ul>
@@ -15,6 +15,20 @@ export default {
     //   const year = new Date().getFullYear()
     //   return Array.from({length: year - 1900}, (value, index) => 1901 + index)
     // }
+    currentData() {
+      const myDate = new Date(),
+            dayNumber = myDate.getDate(),
+            month = myDate.getMonth(),
+            days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            monthNames = ["January", "February", "March", "April", "May", "June",
+                          "July", "August", "September", "October", "November", "December"
+                        ],
+            months = monthNames[myDate.getMonth()],
+            year = myDate.getFullYear(),
+            formattedDate = dayNumber + '/' + months + '/' + year;
+      return formattedDate;
+    }
+
   }
 }
 </script>
