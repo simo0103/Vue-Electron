@@ -5,11 +5,10 @@
   
         <ul>
           <li>
-              <span class="day" 
-                v-bind:key="dayN" 
-                v-for="dayN in numberOFdaysInMonth" 
-                :value="dayN">{{ dayN }}</span>
-                <span v-bind:key="day" v-for="day in allDays" :value="day">{{ day }}</span>
+              <span class="day"
+                v-bind:key="item.number"
+                v-for="item in getActualMonthDays">{{ item.day }} - {{ item.number }}<br></span>
+                <!-- <span v-bind:key="day" v-for="day in allDays" :value="day">{{ day }}</span> -->
           </li>
 
         </ul>
@@ -88,6 +87,27 @@ export default {
         
       const numberOFdaysInMonth = num;
       return numberOFdaysInMonth;
+    },
+
+    rightDay(today, day) {
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            day = new Date(today.getFullYear(), today.getMonth(), day).getDay();
+        return days[day % 7];
+    },
+
+    getActualMonthDays() {
+        var today = new Date(),
+            numOfDays = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate(),
+            days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            array = [];
+        for(var i = 1; i <= numOfDays; i++) {
+            var day = new Date(today.getFullYear(), today.getMonth(), i).getDay();
+            array.push({
+                day: days[day % 7],
+                number: i
+            });
+        }
+        return array;
     }
 
   }
