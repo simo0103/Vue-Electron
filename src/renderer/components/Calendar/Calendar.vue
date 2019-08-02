@@ -1,13 +1,14 @@
 <template>
-    <div class="calendar">
+    <div id="calendar">
         <h1>CALENDAR</h1>
         <h2>{{currentData}}</h2>
-  
+  <!-- add v-bind:class 'today' a <li> se è il giorno odierno -->
         <ul>
-          <li>
-              <span class="day"
-                v-bind:key="item.number"
-                v-for="item in getActualMonthDays">{{ item.day }} - {{ item.number }}<br></span>
+          <li class="day"
+                v-bind:key="d.number"
+                v-for="d in getActualMonthDays">
+                <span>{{ d.day }}</span> 
+                <span class="number"> {{ d.number }}</span>
                 <!-- <span v-bind:key="day" v-for="day in allDays" :value="day">{{ day }}</span> -->
           </li>
 
@@ -113,5 +114,8 @@ export default {
   }
 }
 </script>
-<style>
+
+
+<style lang="scss">
+  @import "../../style/calendar.scss";
 </style>

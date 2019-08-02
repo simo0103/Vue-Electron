@@ -1,0 +1,17 @@
+#calendar {
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        width: 80%;
+        overflow: hidden;
+        height: 80vh;
+        li {
+            text-align: center;
+            display: flex;
+            width: 20%;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid black;
+        }
+    }
+}
