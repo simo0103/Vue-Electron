@@ -1,11 +1,13 @@
 <template>
     <div id="calendar">
         <h1>CALENDAR</h1>
-        <h2>{{currentData}}</h2>
+        <!-- <h2>{{currentData}}</h2> -->
+        <p class= "month">{{getCurrentMonth}}</p>
   <!-- add v-bind:class 'today' a <li> se è il giorno odierno -->
         <ul>
           <li class="day"
                 v-bind:key="d.number"
+                :class= "d.number == getCurrentDay ? 'today' : ''"
                 v-for="d in getActualMonthDays">
                 <span>{{ d.day }}</span> 
                 <span class="number"> {{ d.number }}</span>
@@ -21,6 +23,19 @@
 export default {
   name: 'Calendar',
    computed : {
+    getCurrentDay () {
+        const myDate = new Date(),
+        dayNumber = myDate.getDate();
+        return dayNumber;
+    },
+    getCurrentMonth () {
+        const myDate = new Date(),
+        currentMonth = myDate.getMonth(),
+        monthNames = ["January", "February", "March", "April", "May", "June",
+                          "July", "August", "September", "October", "November", "December"],
+        months = monthNames[myDate.getMonth()];
+        return months;
+    },
     // years () {
     //   const year = new Date().getFullYear()
     //   return Array.from({length: year - 1900}, (value, index) => 1901 + index)

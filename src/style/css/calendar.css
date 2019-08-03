@@ -1,3 +1,10 @@
+#calendar .month {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  width: inherit;
+}
+
 #calendar ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -20,5 +27,9 @@
           justify-content: space-between;
   padding: 10px;
   border: 1px solid black;
+}
+
+#calendar ul li.today {
+  background-color: red;
 }
 /*# sourceMappingURL=calendar.css.map */

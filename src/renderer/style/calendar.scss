@@ -1,4 +1,10 @@
 #calendar {
+    .month {
+        text-align: center;
+        font-size: 25px;
+        font-weight: bold;
+        width: inherit;
+    }
     ul {
         display: flex;
         flex-wrap: wrap;
@@ -12,6 +18,9 @@
             justify-content: space-between;
             padding: 10px;
             border: 1px solid black;
+            &.today {
+                background-color: red;
+            }
         }
     }
 }
