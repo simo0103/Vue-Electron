@@ -2,8 +2,12 @@
     <div id="calendar">
         <h1>CALENDAR</h1>
         <!-- <h2>{{currentData}}</h2> -->
-        <p class= "month">{{getCurrentMonth}}</p>
-  <!-- add v-bind:class 'today' a <li> se è il giorno odierno -->
+        <div class="nav-calendar">        
+            <font-awesome-icon  class="prev" :icon="['fas', 'chevron-left']"></font-awesome-icon>
+            <p class= "month">{{getCurrentMonth}} {{getCurrentYear}}</p> 
+            <font-awesome-icon  class="prev" :icon="['fas', 'chevron-right']"></font-awesome-icon> 
+        </div>
+        
         <ul>
           <li class="day"
                 v-bind:key="d.number"
@@ -25,7 +29,7 @@ export default {
    computed : {
     getCurrentDay () {
         const myDate = new Date(),
-        dayNumber = myDate.getDate();
+              dayNumber = myDate.getDate();
         return dayNumber;
     },
     getCurrentMonth () {
@@ -35,6 +39,17 @@ export default {
                           "July", "August", "September", "October", "November", "December"],
         months = monthNames[myDate.getMonth()];
         return months;
+    },
+    getCurrentYear() {
+      const myDate = new Date(),  
+            currentYear = myDate.getFullYear();    
+        return currentYear;
+    },
+
+    next() {
+     const currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear,
+           currentMonth = (currentMonth + 1) % 12;
+           console.log(currentYear)
     },
     // years () {
     //   const year = new Date().getFullYear()
