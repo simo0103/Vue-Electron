@@ -1,18 +1,39 @@
 #calendar {
     padding: 0 3%;
+    .nav-title {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        align-items: center;
+        button {
+            background-color: #415289;
+            border-color: transparent;
+            border-radius: 3px;
+            padding: 10px;
+            color: white;
+        }
+    }
     .nav-calendar {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
+        width: 220px;
+        margin: 0 auto 30px;
+        .prev,
+        .next {
+            cursor: pointer;
+        }
+        .month {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            width: inherit;
+            margin: 0 5%;
+        }
 
     }
-    .month {
-        text-align: center;
-        font-size: 25px;
-        font-weight: bold;
-        width: inherit;
-    }
+    
     ul {
         display: flex;
         flex-wrap: wrap;
@@ -21,9 +42,10 @@
         li {
             text-align: center;
             display: flex;
-            width: 20%;
-            justify-content: space-between;
+            flex-grow: 0;
+            flex: 0 1 14.28%;
             padding: 10px;
+            box-sizing: border-box;
             border: 1px solid black;
             &.today {
                 background-color: red;

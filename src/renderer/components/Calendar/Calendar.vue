@@ -1,25 +1,42 @@
 <template>
     <div id="calendar">
-        <h1>CALENDAR</h1>
-        <h2>{{currentData}}</h2>
+        <div class="nav-title">
+            <h2>CALENDAR</h2>
+            <button>+ Create New Event</button>
+        </div>
+        
+        <!-- <h2>{{currentData}}</h2> -->
         <div class="nav-calendar">        
-            <font-awesome-icon  class="prev" :icon="['fas', 'chevron-left']"></font-awesome-icon>
+            <font-awesome-icon  class="prev" v-on:click="getPrevMonth" :icon="['fas', 'chevron-left']"></font-awesome-icon>
+            <!-- <span>{{currentMonth}}</span> -->
             <p class= "month">{{getCurrentMonth}} {{currentYear}}</p> 
-            <font-awesome-icon  class="prev" :icon="['fas', 'chevron-right']"></font-awesome-icon> 
+            <font-awesome-icon  class="prev" v-on:click="getNextMonth" :icon="['fas', 'chevron-right']"></font-awesome-icon> 
         </div>
         
         <ul>
-          <li class="day"
-                v-bind:key="d.number"
-                :class= "d.number == currentDay ? 'today' : ''"
-                v-for="d in getActualMonthDays">
-                <span>{{ d.day }}</span> 
-                <span class="number"> {{ d.number }}</span>
-                <!-- <span v-bind:key="day" v-for="day in allDays" :value="day">{{ day }}</span> -->
-          </li>
+            <li class="day"
+                    v-bind:key="d.number"
+                    :class= "d.number == currentDay ? 'today' : ''"
+                    v-for="d in getActualMonthDays">
+                    <span>{{ d.day }}</span> 
+                    <span class="number"> {{ d.number }}</span>
+                    <!-- <span v-bind:key="day" v-for="day in allDays" :value="day">{{ day }}</span> -->
+            </li>
 
         </ul>
-        
+        <!-- <table>
+            <tr class="day"
+                    v-bind:key="d.number"
+                    :class= "d.number == currentDay ? 'today' : ''"
+                    v-for="d in getActualMonthDays">
+                    <td>{{ d.day }}</td> 
+                    <td class="number"> {{ d.number }}</td>
+                    
+
+            </tr>
+
+        </table>
+         -->
 
     </div>
 </template>
@@ -29,95 +46,114 @@ export default {
     data: function() {
         return {
             myDate : new Date(),
-            arrayOfDays : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'],
+            arrayOfDays : ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             monthNames : ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"],
-            currentMonth : new Date().getMonth(),     
+            currentMonth : new Date().getMonth() +1,     
+           
             currentDay : new Date().getDate(),
-            currentYear : new Date().getFullYear(),
+            currentYear : new Date().getFullYear()
         };
     },
-   computed : {
-    //nome mese
-    getCurrentMonth () {
-        const months = this.monthNames[this.myDate.getMonth()];
-        return months;
-    },
-    
-    currentData() {
-      const dayNumber = this.currentDay,
-            dayOfTheWeek = this.myDate.getDay(),
+    computed : {
+        //nome mese
+        getCurrentMonth () {
+            const months = this.monthNames[this.currentMonth-1];
+            return months;
+        },
+
+        currentData() {
+        const dayNumber = this.currentDay,
+                dayOfTheWeek = this.myDate.getDay(),
+                
+                months = this.monthNames[this.myDate.getMonth()];
             
-            months = this.monthNames[this.myDate.getMonth()];
-           
-            let numberOfDays = new Date(this.currentYear, this.currentMonth + 1, 0).getDate(),
-                day = "";
-            switch(dayOfTheWeek) {
-                case 0:
-                    day = "Sunday";                   
-                    break;
-                case 1:
-                    day = "Monday";
-                    break;
-                case 2:
-                    day = "Tuesday";
-                    break;
-                case 3:
-                    day = "Wednesday";
-                    break;
-                case 4:
-                    day = "Thursday";
-                    break;
-                case 5:
-                    day = "Friday";
-                    break;
-                case 6:
-                    day = "Saturday";
-                    break;
-                default: 
+                let numberOfDays = new Date(this.currentYear, this.currentMonth, 0).getDate(),
                     day = "";
-            } 
-      
-          const formattedDate = day + '/' + months + '/' + this.currentYear + '/' + numberOfDays;
-      return formattedDate;
-    },
-
-    numberOFdaysInMonth() {
-      const currentMonth = this.myDate.getMonth(),
-            currentYear = this.myDate.getFullYear();
-      let numberOfDays = new Date(currentYear, currentMonth + 1, 0).getDate(),
-          num = [];          
-          for(var i = 1; i <= numberOfDays ; i++) {
-              console.log(i);             
-              num.push(i);
-              
-          };
+                switch(dayOfTheWeek) {
+                    case 0:
+                        day = "Sunday";                   
+                        break;
+                    case 1:
+                        day = "Monday";
+                        break;
+                    case 2:
+                        day = "Tuesday";
+                        break;
+                    case 3:
+                        day = "Wednesday";
+                        break;
+                    case 4:
+                        day = "Thursday";
+                        break;
+                    case 5:
+                        day = "Friday";
+                        break;
+                    case 6:
+                        day = "Saturday";
+                        break;
+                    default: 
+                        day = "";
+                } 
         
-       this.numberOFdaysInMonth = num;
-      return numberOFdaysInMonth;
-    },
+            const formattedDate = day + '/' + months + '/' + this.currentYear + '/' + numberOfDays;
+        return formattedDate;
+        },
 
-    rightDay(today, day) {
-        var days = this.arrayOfDays,
-            day = new Date(today.getFullYear(), today.getMonth(), day).getDay();
-        return days[day % 7];
-    },
+        numberOFdaysInMonth() {
+        let numberOfDays = new Date(this.currentYear, this.currentMonth, 0).getDate(),
+            num = [];          
+            for(var i = 1; i <= numberOfDays ; i++) {
+                console.log(i);             
+                num.push(i);
+                
+            };
+            
+        this.numberOFdaysInMonth = num;
+        return numberOFdaysInMonth;
+        },
 
-    getActualMonthDays() {
-        var today = this.myDate,
-            numOfDays = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate(),
-            array = [];
-        for(var i = 1; i <= numOfDays; i++) {
-            var day = new Date(today.getFullYear(), today.getMonth(), i).getDay();
-            array.push({
-                day: this.arrayOfDays[day % 7],
-                number: i
-            });
+        rightDay(today, day) {
+            var days = this.arrayOfDays,
+                day = new Date(this.currentYear, this.currentMonth, day).getDay();
+            return days[day % 7];
+        },
+
+        getActualMonthDays() {
+            var today = this.myDate,
+                numOfDays = new Date(this.currentYear, this.currentMonth, 0).getDate(),
+                array = [];
+            for(var i = 1; i <= numOfDays; i++) {
+                var day = new Date(this.currentYear, this.currentMonth -1, i).getDay();
+                array.push({
+                    day: this.arrayOfDays[day % 7],
+                    number: i
+                });
+            }
+            return array;
         }
-        return array;
-    }
 
-  }
+    },
+    methods : {
+        getPrevMonth : function(event) {
+            this.currentMonth--;
+            if(this.currentMonth % 12 == 0) {
+                this.currentYear--;
+            }
+            if (this.currentMonth == 0) {
+                this.currentMonth = 12;
+            }
+        },
+        getNextMonth : function(event) {
+            this.currentMonth++;
+            if(this.currentMonth % 13 == 0 ) {
+                this.currentYear++;
+            }
+            if (this.currentMonth == 13) {
+                this.currentMonth = 1;
+            }
+        },
+    }
 }
 </script>
 
