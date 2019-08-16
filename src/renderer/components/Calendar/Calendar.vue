@@ -12,15 +12,14 @@
             <p class= "month">{{getCurrentMonth}} {{currentYear}}</p> 
             <font-awesome-icon  class="prev" v-on:click="getNextMonth" :icon="['fas', 'chevron-right']"></font-awesome-icon> 
         </div>
-        
+        <span v-bind:key="day" v-for="day in arrayOfDays" :value="day">{{ day }}</span>
         <ul>
             <li class="day"
-                    v-bind:key="d.number"
-                    :class= "d.number == currentDay ? 'today' : ''"
-                    v-for="d in getActualMonthDays">
-                    <span>{{ d.day }}</span> 
-                    <span class="number"> {{ d.number }}</span>
-                    <!-- <span v-bind:key="day" v-for="day in allDays" :value="day">{{ day }}</span> -->
+                v-bind:key="d.key"
+                :class= "d.number == currentDay ? 'today' : ''"
+                v-for="d in getActualMonthDays">
+                
+                <span class="number"> {{ d.number }}</span>                  
             </li>
 
         </ul>
@@ -50,7 +49,6 @@ export default {
             monthNames : ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"],
             currentMonth : new Date().getMonth() +1,     
-           
             currentDay : new Date().getDate(),
             currentYear : new Date().getFullYear()
         };
@@ -120,16 +118,33 @@ export default {
         },
 
         getActualMonthDays() {
+            //1 recupero 1 gg del mese
+            //if primo gg è monday ????
+
             var today = this.myDate,
                 numOfDays = new Date(this.currentYear, this.currentMonth, 0).getDate(),
                 array = [];
-            for(var i = 1; i <= numOfDays; i++) {
-                var day = new Date(this.currentYear, this.currentMonth -1, i).getDay();
-                array.push({
-                    day: this.arrayOfDays[day % 7],
-                    number: i
+
+            var firstDay = new Date(this.currentYear, this.currentMonth -1, 1).getDay();
+            for(var i = 1; i <= numOfDays + 7 - firstDay; i++) {
+                var gg = i - firstDay,
+                    day = new Date(this.currentYear, this.currentMonth -1, gg);
+                    array.push({
+                    key: i,
+                    day: this.arrayOfDays[day.getDay() % 7],
+                    number:day.getDate(),
+                    month: this.currentMonth -1
                 });
+            
             }
+            // for(var i = 1; i <= numOfDays; i++) {
+            //     var day = new Date(this.currentYear, this.currentMonth -1, i).getDay();
+
+            //     array.push({
+            //         day: this.arrayOfDays[day % 7],
+            //         number: i
+            //     });
+            // }
             return array;
         }
 
