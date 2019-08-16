@@ -4,7 +4,7 @@
     .nav-title {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 30px;
+        height: 100px;
         align-items: center;
         button {
             //background-color: #FA8072;
@@ -25,6 +25,7 @@
         .prev,
         .next {
             cursor: pointer;
+            color: #ffb554;
         }
         .month {
             text-align: center;
@@ -44,17 +45,35 @@
             &.dayNumber {
                 flex-wrap: wrap;
                 border-left: 1px solid lightgray;
+                font-size: 20px;
                 td {
                     height: 100px;
                     border-right: 1px solid lightgray;
                     border-bottom: 1px solid lightgray;
                     padding: 5px;
+                    &.sunday {
+                        color: #fe5e51;
+                        font-weight: bold;
+                    }
                     &.today {
+                        padding-top: 0;
                         border-top: 5px solid #ffb554;
                     }
                     &.otherMonth {
                         color: lightgray;
                     }
+                    &.isHoliday {
+                        color: #fe5e51;
+                        font-weight: bold;
+                        display: flex;
+                        justify-content: space-between;
+                        .holidayName {
+                            font-size: 12px;
+                            padding: 5px;
+                            text-decoration: underline;
+                        }
+                    }
+                   
                 }
             }
             &.dayName {
@@ -62,8 +81,11 @@
                 height: 60px;
                 align-items: center;
                // background-color: #d9ebfb;
-               background-color: #36abb5;
-               color: white;
+                background-color: #36abb5;
+                color: white;
+                text-transform: uppercase;
+                font-size: 20px;
+                font-weight: bold;
             }
             td {
                 flex-grow: 0;

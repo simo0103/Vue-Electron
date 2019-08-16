@@ -14,7 +14,7 @@
         </div>
         <table>
             <tr class="dayName">
-                <td v-bind:key="day" v-for="day in arrayOfDays" :value="day">{{ day }}</td>
+                <td v-bind:key="day" v-for="day in shortDays" :value="day">{{ day }}</td>
             </tr>
             <tr class="dayNumber">                 
                 <td 
@@ -22,7 +22,9 @@
                     :class= "d.class"
                    
                     v-for="d in getActualMonthDays"> 
-                    {{ d.number }}
+                    <span>{{ d.number }}</span>
+                    <span class="holidayName">{{ d.holidayName }}</span>
+                    
                 </td>
             </tr>
 
@@ -38,6 +40,7 @@ export default {
         return {
             myDate : new Date(),
             arrayOfDays : ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            shortDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
             monthNames : ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"],
             currentMonth : new Date().getMonth() +1,     
@@ -119,20 +122,22 @@ export default {
                 array = [];
 
             var firstDay = new Date(this.currentYear, this.currentMonth -1, 1).getDay();
-            for(var i = 1; i <= numOfDays + 7 - firstDay; i++) {
+            for(var i = 1; i <= numOfDays + firstDay; i++) {
                 var gg = i - firstDay,
                     dayClass = "",
-                    day = new Date(this.currentYear, this.currentMonth -1, gg),
-                    isTodayClass = gg == this.currentDay && day.getMonth() == this.currentMonth ? dayClass+= "today" : "",
-                    isOtherMonthClass = day.getMonth() !== this.currentMonth -1 ? dayClass+= " otherMonth" : "",
-                    isHolidayClass = hd.isHoliday(new Date ('"' + day + '"')) !== false ? dayClass+= " isHoliday" : "";
 
-                    
+                    day = new Date(this.currentYear, this.currentMonth -1, gg),
+                    isTodayClass = gg == this.currentDay && today.getMonth() == this.currentMonth -1 ? dayClass+= "today" : "",
+                    isOtherMonthClass = day.getMonth() !== this.currentMonth -1 ? dayClass+= " otherMonth" : "",
+                    isHolidayClass = hd.isHoliday(new Date ('"' + day + '"')) !== false ? dayClass+= " isHoliday" : "",
+                    isWeekend = day.getDay() == 6 || day.getDay() == 0   ? dayClass += " weekend" : "",
+                    isSunday = day.getDay() == 0 ? dayClass += " sunday" : "";        
                     array.push({
                     key: i,
                     day: this.arrayOfDays[day.getDay() % 7],
                     number:day.getDate(),
-                    month: this.currentMonth -1,
+                    month: this.currentMonth,
+                    holidayName: hd.isHoliday(new Date ('"' + day + '"')).name,
                     class: dayClass
                 });
             
