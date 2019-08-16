@@ -112,6 +112,9 @@ export default {
         getActualMonthDays() {
 
             var today = this.myDate,
+                Holidays = require('date-holidays'),
+                hd = new Holidays('IT'),
+                currentYearHolidays = hd.getHolidays(this.currentYear),
                 numOfDays = new Date(this.currentYear, this.currentMonth, 0).getDate(),
                 array = [];
 
@@ -120,8 +123,11 @@ export default {
                 var gg = i - firstDay,
                     dayClass = "",
                     day = new Date(this.currentYear, this.currentMonth -1, gg),
-                    isTodayClass = gg == this.currentDay ? dayClass+= "today" : "",
-                    isPrevMonth = gg < 1 ? dayClass+= "prevMonth" : "";
+                    isTodayClass = gg == this.currentDay && day.getMonth() == this.currentMonth ? dayClass+= "today" : "",
+                    isOtherMonthClass = day.getMonth() !== this.currentMonth -1 ? dayClass+= " otherMonth" : "",
+                    isHolidayClass = hd.isHoliday(new Date ('"' + day + '"')) !== false ? dayClass+= " isHoliday" : "";
+
+                    
                     array.push({
                     key: i,
                     day: this.arrayOfDays[day.getDay() % 7],
@@ -131,15 +137,8 @@ export default {
                 });
             
             }
-            // for(var i = 1; i <= numOfDays; i++) {
-            //     var day = new Date(this.currentYear, this.currentMonth -1, i).getDay();
-
-            //     array.push({
-            //         day: this.arrayOfDays[day % 7],
-            //         number: i
-            //     });
-            // }
             return array;
+            console.log(array)
         }
 
     },
@@ -153,6 +152,7 @@ export default {
                 this.currentMonth = 12;
             }
         },
+
         getNextMonth : function(event) {
             this.currentMonth++;
             if(this.currentMonth % 13 == 0 ) {
