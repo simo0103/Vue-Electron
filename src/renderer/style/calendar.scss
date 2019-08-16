@@ -7,7 +7,8 @@
         margin-bottom: 30px;
         align-items: center;
         button {
-            background-color: #415289;
+            //background-color: #FA8072;
+            background-color: #fe5e51;
             border-color: transparent;
             border-radius: 3px;
             padding: 10px;
@@ -48,13 +49,21 @@
                     border-right: 1px solid lightgray;
                     border-bottom: 1px solid lightgray;
                     padding: 5px;
+                    &.today {
+                        border-top: 5px solid #ffb554;
+                    }
+                    &.prevMonth {
+                        color: lightgray;
+                    }
                 }
             }
             &.dayName {
                 text-align: center;
                 height: 60px;
                 align-items: center;
-                background-color: #d9ebfb;
+               // background-color: #d9ebfb;
+               background-color: #36abb5;
+               color: white;
             }
             td {
                 flex-grow: 0;

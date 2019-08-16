@@ -19,7 +19,8 @@
             <tr class="dayNumber">                 
                 <td 
                     v-bind:key="d.key"
-                    :class= "d.number == currentDay ? 'today' : ''"
+                    :class= "d.class"
+                   
                     v-for="d in getActualMonthDays"> 
                     {{ d.number }}
                 </td>
@@ -109,8 +110,6 @@ export default {
         },
 
         getActualMonthDays() {
-            //1 recupero 1 gg del mese
-            //if primo gg è monday ????
 
             var today = this.myDate,
                 numOfDays = new Date(this.currentYear, this.currentMonth, 0).getDate(),
@@ -119,14 +118,16 @@ export default {
             var firstDay = new Date(this.currentYear, this.currentMonth -1, 1).getDay();
             for(var i = 1; i <= numOfDays + 7 - firstDay; i++) {
                 var gg = i - firstDay,
+                    dayClass = "",
                     day = new Date(this.currentYear, this.currentMonth -1, gg),
-                    isToday = gg == this.currentDay;
+                    isTodayClass = gg == this.currentDay ? dayClass+= "today" : "",
+                    isPrevMonth = gg < 1 ? dayClass+= "prevMonth" : "";
                     array.push({
                     key: i,
                     day: this.arrayOfDays[day.getDay() % 7],
                     number:day.getDate(),
                     month: this.currentMonth -1,
-                    isToday: isToday
+                    class: dayClass
                 });
             
             }
