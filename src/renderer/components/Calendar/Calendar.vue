@@ -12,30 +12,21 @@
             <p class= "month">{{getCurrentMonth}} {{currentYear}}</p> 
             <font-awesome-icon  class="prev" v-on:click="getNextMonth" :icon="['fas', 'chevron-right']"></font-awesome-icon> 
         </div>
-        <span v-bind:key="day" v-for="day in arrayOfDays" :value="day">{{ day }}</span>
-        <ul>
-            <li class="day"
-                v-bind:key="d.key"
-                :class= "d.number == currentDay ? 'today' : ''"
-                v-for="d in getActualMonthDays">
-                
-                <span class="number"> {{ d.number }}</span>                  
-            </li>
-
-        </ul>
-        <!-- <table>
-            <tr class="day"
-                    v-bind:key="d.number"
+        <table>
+            <tr class="dayName">
+                <td v-bind:key="day" v-for="day in arrayOfDays" :value="day">{{ day }}</td>
+            </tr>
+            <tr class="dayNumber">                 
+                <td 
+                    v-bind:key="d.key"
                     :class= "d.number == currentDay ? 'today' : ''"
-                    v-for="d in getActualMonthDays">
-                    <td>{{ d.day }}</td> 
-                    <td class="number"> {{ d.number }}</td>
-                    
-
+                    v-for="d in getActualMonthDays"> 
+                    {{ d.number }}
+                </td>
             </tr>
 
         </table>
-         -->
+        
 
     </div>
 </template>
@@ -128,12 +119,14 @@ export default {
             var firstDay = new Date(this.currentYear, this.currentMonth -1, 1).getDay();
             for(var i = 1; i <= numOfDays + 7 - firstDay; i++) {
                 var gg = i - firstDay,
-                    day = new Date(this.currentYear, this.currentMonth -1, gg);
+                    day = new Date(this.currentYear, this.currentMonth -1, gg),
+                    isToday = gg == this.currentDay;
                     array.push({
                     key: i,
                     day: this.arrayOfDays[day.getDay() % 7],
                     number:day.getDate(),
-                    month: this.currentMonth -1
+                    month: this.currentMonth -1,
+                    isToday: isToday
                 });
             
             }
