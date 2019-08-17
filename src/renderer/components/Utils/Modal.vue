@@ -1,13 +1,17 @@
-<template><div class="overlay"><div class="modal"></div></div></template><script>export default {
+<template>
+    <div class="overlay">
+        <div class="modal"></div>
+    </div>
+    </template>
+    <script>
+    export default {
     name: 'modal',
 
     data () {
         return {
             visible: this.show
         }
-    }
-
-    ,
+    },
 }
 
 </script>
