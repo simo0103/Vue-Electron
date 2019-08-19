@@ -1,12 +1,9 @@
 <template>
-   <div id="modal-pupup">
-        <div class="overlay" ref="overlay">
+
             <div class="modal">
                 <span class="close" @click="$emit('close')" >X</span>
             </div>
-        </div>
-    </div> 
-    
+       
     </template>
     <script>
     export default {
@@ -24,23 +21,16 @@
 
 </script>
 <style lang="scss">
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(119, 116, 134, 0.21);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .modal {
     background: #fff;
+    position: absolute;
     box-shadow: 2px 2px 20px 1px;
     width: 50vw;
+    top: 50%;
     height: 60vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
     .close {
         cursor: pointer;
     }

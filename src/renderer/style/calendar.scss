@@ -1,6 +1,10 @@
 #calendar {
     padding: 0 3%;
     position: relative;
+    width: 100%;
+    &.openModal {
+        background: rgba(119, 116, 134, 0.21);
+    }
     .nav-title {
         display: flex;
         justify-content: space-between;

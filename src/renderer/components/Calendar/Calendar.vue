@@ -1,5 +1,5 @@
 <template>
-    <div id="calendar">
+    <div id="calendar" v-bind:class="{ openModal: showModal }">
         <div class="nav-title">
             <h2>CALENDAR</h2>
             <button>+ Create New Event</button>
@@ -14,12 +14,14 @@
             <font-awesome-icon class="prev" v-on:click="getNextMonth" :icon="['fas', 'chevron-right']">
             </font-awesome-icon>
         </div>
+        
         <table>
             <tr class="dayName">
                 <td v-bind:key="day" v-for="day in shortDays" :value="day">{{ day }}</td>
             </tr>
             <tr class="dayNumber">
                 <td v-bind:key="d.key" :class="d.class" @click="showModal = true" v-for="d in getActualMonthDays">
+
                     <span>{{ d.number }}</span>
                     <span class="holidayName">{{ d.holidayName }}</span>
 
