@@ -1,7 +1,12 @@
 <template>
-    <div class="overlay">
-        <div class="modal"></div>
-    </div>
+   <div id="modal-pupup">
+        <div class="overlay" ref="overlay">
+            <div class="modal">
+                <span class="close" @click="$emit('close')" >X</span>
+            </div>
+        </div>
+    </div> 
+    
     </template>
     <script>
     export default {
@@ -9,8 +14,11 @@
 
     data () {
         return {
-            visible: this.show
+            showModal: false
         }
+    },
+    methods: {
+       
     },
 }
 
@@ -33,6 +41,9 @@
     box-shadow: 2px 2px 20px 1px;
     width: 50vw;
     height: 60vh;
+    .close {
+        cursor: pointer;
+    }
 }
 
 </style>

@@ -19,7 +19,7 @@
                 <td v-bind:key="day" v-for="day in shortDays" :value="day">{{ day }}</td>
             </tr>
             <tr class="dayNumber">
-                <td v-bind:key="d.key" :class="d.class" @click="showModal" v-for="d in getActualMonthDays">
+                <td v-bind:key="d.key" :class="d.class" @click="showModal = true" v-for="d in getActualMonthDays">
                     <span>{{ d.number }}</span>
                     <span class="holidayName">{{ d.holidayName }}</span>
 
@@ -27,7 +27,7 @@
             </tr>
 
         </table>
-        <modal v-bind:class="{ open: isModalVisible }" v-show="isModalVisible" />
+        <modal v-bind:class="{ open: showModal }"  v-if="showModal" @close="showModal = false" />
 
     </div>
 
@@ -51,7 +51,7 @@
                 currentMonth: new Date().getMonth() + 1,
                 currentDay: new Date().getDate(),
                 currentYear: new Date().getFullYear(),
-                isModalVisible: false,
+                showModal: false,
             };
         },
         computed: {
@@ -174,13 +174,6 @@
                 if (this.currentMonth == 13) {
                     this.currentMonth = 1;
                 }
-            },
-
-            showModal() {
-                this.isModalVisible = true;
-            },
-            closeModal() {
-                this.isModalVisible = false;
             },
         }
     }
