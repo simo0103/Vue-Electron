@@ -1,22 +1,27 @@
 <template>
 
-            <div class="modal">
-                <span class="close" @click="$emit('close')" >X</span>
-            </div>
+    <div class="modal">
+            <img alt="close popup"  class="close" @click="$emit('close')" src="../../../svg/closeorange.svg"> 
+    
+                    
+    </div>
        
     </template>
     <script>
+    import Calendar from "../Calendar/Calendar"
     export default {
-    name: 'modal',
-
+    name: 'Modal',
+    components: {
+        Calendar
+    },
     data () {
         return {
-            showModal: false
+            showModal: false,
         }
     },
     methods: {
        
-    },
+    }
 }
 
 </script>
@@ -33,6 +38,10 @@
     transform: translate(-50%, -50%);
     .close {
         cursor: pointer;
+        width: 25px;
+        position: absolute;
+        right: 0;
+        top: -40px;
     }
 }
 

@@ -20,27 +20,28 @@
                 <td v-bind:key="day" v-for="day in shortDays" :value="day">{{ day }}</td>
             </tr>
             <tr class="dayNumber">
-                <td v-bind:key="d.key" :class="d.class" @click="showModal = true" v-for="d in getActualMonthDays">
+                <td v-bind:key="d.key" :class="d.class" @click="showModalFunction(d)" v-for="d in getActualMonthDays">
 
                     <span>{{ d.number }}</span>
+                   
                     <span class="holidayName">{{ d.holidayName }}</span>
 
                 </td>
             </tr>
 
         </table>
-        <modal v-bind:class="{ open: showModal }"  v-if="showModal" @close="showModal = false" />
+        <popup v-bind:class="{ open: showModal }" v-if="showModal" @close="showModal = false" />
 
     </div>
 
 
 </template>
 <script>
-    import modal from '../Utils/Modal.vue';
+    import Modal from '../Utils/Modal.vue';
     export default {
         name: 'Calendar',
         components: {
-            modal,
+            'popup' : Modal
         },
         data: function () {
             return {
@@ -54,6 +55,8 @@
                 currentDay: new Date().getDate(),
                 currentYear: new Date().getFullYear(),
                 showModal: false,
+                selectedElement: [],
+                childData: ""
             };
         },
         computed: {
@@ -61,44 +64,6 @@
             getCurrentMonth() {
                 const months = this.monthNames[this.currentMonth - 1];
                 return months;
-            },
-
-            currentData() {
-                const dayNumber = this.currentDay,
-                    dayOfTheWeek = this.myDate.getDay(),
-
-                    months = this.monthNames[this.myDate.getMonth()];
-
-                let numberOfDays = new Date(this.currentYear, this.currentMonth, 0).getDate(),
-                    day = "";
-                switch (dayOfTheWeek) {
-                    case 0:
-                        day = "Sunday";
-                        break;
-                    case 1:
-                        day = "Monday";
-                        break;
-                    case 2:
-                        day = "Tuesday";
-                        break;
-                    case 3:
-                        day = "Wednesday";
-                        break;
-                    case 4:
-                        day = "Thursday";
-                        break;
-                    case 5:
-                        day = "Friday";
-                        break;
-                    case 6:
-                        day = "Saturday";
-                        break;
-                    default:
-                        day = "";
-                }
-
-                const formattedDate = day + '/' + months + '/' + this.currentYear + '/' + numberOfDays;
-                return formattedDate;
             },
 
             numberOFdaysInMonth() {
@@ -132,7 +97,6 @@
                 for (var i = 1; i <= numOfDays + firstDay; i++) {
                     var gg = i - firstDay,
                         dayClass = "",
-
                         day = new Date(this.currentYear, this.currentMonth - 1, gg),
                         isTodayClass = gg == this.currentDay && today.getMonth() == this.currentMonth - 1 ? dayClass +=
                         "today" : "",
@@ -141,6 +105,7 @@
                         "",
                         isWeekend = day.getDay() == 6 || day.getDay() == 0 ? dayClass += " weekend" : "",
                         isSunday = day.getDay() == 0 ? dayClass += " sunday" : "";
+
                     array.push({
                         key: i,
                         day: this.arrayOfDays[day.getDay() % 7],
@@ -177,6 +142,14 @@
                     this.currentMonth = 1;
                 }
             },
+            showModalFunction: function (d) {
+                let holiday = d.holidayName != undefined ? d.holidayName : null;
+                this.showModal = true;
+
+                this.selectedElement.push(d.key,d.day, d.number, holiday);
+                this.$emit("passDayData", d)
+            }
+
         }
     }
 </script>
