@@ -60,6 +60,7 @@
                 currentMonth: new Date().getMonth() + 1,
                 currentDay: new Date().getDate(),
                 currentYear: new Date().getFullYear(),
+                numOfDays : "",
                 showModal: false,
                 dayNameForModal: "",
                 dayNumberForModal: "",
@@ -118,7 +119,8 @@
                         number: day.getDate(),
                         month: this.currentMonth,
                         holidayName: hd.isHoliday(new Date('"' + day + '"')).name,
-                        class: dayClass
+                        class: dayClass,
+                        numOfDays: numOfDays
                     });
 
                 }
@@ -151,7 +153,7 @@
             showModalFunction: function (d) {
                 let holiday = d.holidayName != undefined ? d.holidayName : null;
                 this.showModal = true;
-
+                this.numOfDays = d.numOfDays;
                 this.dayNumberForModal = d.number;
                 this.dayNameForModal = d.day;
             }

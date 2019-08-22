@@ -39,6 +39,6 @@ import Navigation from './components/Utils/Navigation'
   }
   #app {
     display: flex;
-
+    background-color: #252B3B;
   }
 </style>

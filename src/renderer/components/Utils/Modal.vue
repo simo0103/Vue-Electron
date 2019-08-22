@@ -6,6 +6,9 @@
                  <span>{{dayNumber}}</span>
                  <span>{{dayName}}</span>
             </div>
+            <form>
+
+            </form>
                                
     </div>
        
@@ -16,7 +19,8 @@
     name: 'Modal',
     props: [
         'dayNumber',
-        'dayName'
+        'dayName',
+        'numOfDays'
     ],
 
     components: {
