@@ -30,7 +30,13 @@
             </tr>
 
         </table>
-        <popup v-bind:class="{ open: showModal }" v-if="showModal" @close="showModal = false" />
+        <popup 
+            v-bind:class="{ open: showModal }" 
+            :dayNumber="dayNumberForModal" 
+            :dayName="dayNameForModal"
+            v-if="showModal" 
+            @close="showModal = false">
+        </popup>
 
     </div>
 
@@ -55,8 +61,8 @@
                 currentDay: new Date().getDate(),
                 currentYear: new Date().getFullYear(),
                 showModal: false,
-                selectedElement: [],
-                childData: ""
+                dayNameForModal: "",
+                dayNumberForModal: "",
             };
         },
         computed: {
@@ -146,8 +152,8 @@
                 let holiday = d.holidayName != undefined ? d.holidayName : null;
                 this.showModal = true;
 
-                this.selectedElement.push(d.key,d.day, d.number, holiday);
-                this.$emit("passDayData", d)
+                this.dayNumberForModal = d.number;
+                this.dayNameForModal = d.day;
             }
 
         }

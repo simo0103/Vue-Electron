@@ -2,8 +2,11 @@
 
     <div class="modal">
             <img alt="close popup"  class="close" @click="$emit('close')" src="../../../svg/closeorange.svg"> 
-    
-                    
+            <div class="days">
+                 <span>{{dayNumber}}</span>
+                 <span>{{dayName}}</span>
+            </div>
+                               
     </div>
        
     </template>
@@ -11,6 +14,11 @@
     import Calendar from "../Calendar/Calendar"
     export default {
     name: 'Modal',
+    props: [
+        'dayNumber',
+        'dayName'
+    ],
+
     components: {
         Calendar
     },
@@ -37,6 +45,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     .close {
+        box-shadow: 2px 2px 20px 1px;
+        border-radius: 50%;
         cursor: pointer;
         width: 25px;
         position: absolute;
