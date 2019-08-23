@@ -6,15 +6,15 @@
                  <span>{{dayNumber}}</span>
                  <span>{{dayName}}</span>
             </div>
-            <form>
-
-            </form>
+            <Form></Form>
+            
                                
     </div>
        
     </template>
     <script>
     import Calendar from "../Calendar/Calendar"
+    import Form from "../Calendar/Form"
     export default {
     name: 'Modal',
     props: [
@@ -24,7 +24,8 @@
     ],
 
     components: {
-        Calendar
+        Calendar,
+        Form
     },
     data () {
         return {
@@ -49,13 +50,27 @@
     left: 50%;
     transform: translate(-50%, -50%);
     .close {
-        box-shadow: 2px 2px 20px 1px;
-        border-radius: 50%;
+       
         cursor: pointer;
         width: 25px;
         position: absolute;
-        right: 0;
-        top: -40px;
+        right: 1%;
+        top: 1%;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: auto;
+        label {
+            text-transform: uppercase;
+            color: #868b8d
+        }
+  
+        input {
+            border: 1px solid lightgrey;
+        }
+       
     }
 }
 
