@@ -39,9 +39,8 @@
         </popup>
 
     </div>
-
-
 </template>
+
 <script>
     import Modal from '../Utils/Modal.vue';
     export default {

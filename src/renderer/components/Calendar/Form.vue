@@ -27,18 +27,25 @@
             <input v-model="price" class="price" @keypress="isNumber($event)">
            
         </form>       
-        <div class="formRecap">
-            <span>{{selectedType}}</span>
-            <span>{{selectedCategory}}</span>
-            <span>{{description}}</span>
-            <span>{{price}}</span>
-        </div>   
-        <button @click="addTask">Submit</button>         
+        
+        <button @click="addTask">Submit</button>   
+        <table>
+            <tr>
+                <td>Type</td>
+                <td>Category</td>
+                <td>Amount</td>
+                <td>Description</td>
+            </tr>
         <transition-group name="fade" tag="ul">
             <li v-bind:key="index" v-for="(el, index) in inAndOut">
-                {{el.type}} {{el.category}}
+                <span>Type: {{el.type}} </span>
+                <span>Category: {{el.category}} </span>
+                <span>Amount: {{el.amount}} </span> 
+                <span>Description: {{el.description}} </span>               
             </li>
-        </transition-group>  
+        </transition-group> 
+        </table>      
+         
     </div>
        
     </template>
@@ -69,23 +76,25 @@
     methods: {
        onChange(event) {
   
-            if(this.selected == 'expense') {
+            if(this.selectedType == 'expense') {
                 this.categoryArray = this.outArray.slice(0)
-            } else {
+            } else if(this.selectedType == 'income') {
                 this.categoryArray = this.inArray.slice(0)
-            }
-
-          
+            }       
        },
 
        addTask() {
-            if(this.selectedCategory && this.selectedType) {
+            if(this.selectedCategory && this.selectedType && this.price) {
                 this.inAndOut.push({
                 type: this.selectedType,
-                category: this.selectedCategory
+                category: this.selectedCategory,
+                amount: this.price,
+                description: this.description
                 })
                 this.selectedCategory = '',
                 this.selectedType = '';
+                this.price = '';
+                this.description = '';
            }
            
        },
