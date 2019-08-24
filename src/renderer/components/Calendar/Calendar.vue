@@ -21,9 +21,7 @@
             </tr>
             <tr class="dayNumber">
                 <td v-bind:key="d.key" :class="d.class" @click="showModalFunction(d)" v-for="d in getActualMonthDays">
-
                     <span>{{ d.number }}</span>
-                   
                     <span class="holidayName">{{ d.holidayName }}</span>
 
                 </td>
@@ -34,6 +32,7 @@
             v-bind:class="{ open: showModal }" 
             :dayNumber="dayNumberForModal" 
             :dayName="dayNameForModal"
+            :month="monthForModal"
             v-if="showModal" 
             @close="showModal = false">
         </popup>
@@ -62,7 +61,7 @@
                 numOfDays : "",
                 showModal: false,
                 dayNameForModal: "",
-                dayNumberForModal: "",
+                monthForModal: "",
             };
         },
         computed: {
@@ -116,7 +115,7 @@
                         key: i,
                         day: this.arrayOfDays[day.getDay() % 7],
                         number: day.getDate(),
-                        month: this.currentMonth,
+                        month: this.monthNames[day.getMonth()],
                         holidayName: hd.isHoliday(new Date('"' + day + '"')).name,
                         class: dayClass,
                         numOfDays: numOfDays
@@ -155,6 +154,8 @@
                 this.numOfDays = d.numOfDays;
                 this.dayNumberForModal = d.number;
                 this.dayNameForModal = d.day;
+                this.monthForModal = d.month;
+                
             }
 
         }

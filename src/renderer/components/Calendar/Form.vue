@@ -2,7 +2,6 @@
 
     <div id="form">     
         <form>
-
             <label for="inOut">Type</label>
 
             <select name="" id="typeOptions" v-model="selectedType" @change="onChange($event)">
@@ -19,12 +18,11 @@
                 </option>
             </select>
 
-            
-            <label for="description">Description</label>
-            <input v-model='description' class="description">
-
             <label for="price">amount</label>
             <input v-model="price" class="price" @keypress="isNumber($event)">
+
+            <label for="description">Description</label>
+            <input v-model='description' class="description">
            
         </form>       
         
@@ -36,13 +34,13 @@
                 <td>Amount</td>
                 <td>Description</td>
             </tr>
-        <transition-group name="fade" tag="ul">
-            <li v-bind:key="index" v-for="(el, index) in inAndOut">
-                <span>Type: {{el.type}} </span>
-                <span>Category: {{el.category}} </span>
-                <span>Amount: {{el.amount}} </span> 
-                <span>Description: {{el.description}} </span>               
-            </li>
+        <transition-group name="fade" tag="tbody">
+            <tr v-bind:key="`el-${index}`" :class="selectedType == 'expense' ? 'expense' : 'income'" v-for="(el, index) in inAndOut">
+                <td> {{el.type}} </td>
+                <td> {{el.category}} </td>
+                <td> {{el.amount}} </td> 
+                <td> {{el.description}} </td>               
+            </tr>
         </transition-group> 
         </table>      
          
@@ -113,4 +111,14 @@
 
 </script>
 <style lang="scss">
+    #form {
+        form {
+            text-transform: uppercase;
+        }
+        table tr {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+        }
+    }
 </style>

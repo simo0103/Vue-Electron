@@ -19,7 +19,7 @@ import Navigation from './components/Utils/Navigation'
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
   * {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Ubuntu', sans-serif;;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
