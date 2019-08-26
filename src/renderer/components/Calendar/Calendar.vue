@@ -10,7 +10,11 @@
             <font-awesome-icon class="prev" v-on:click="getPrevMonth" :icon="['fas', 'chevron-left']">
             </font-awesome-icon>
             <!-- <span>{{currentMonth}}</span> -->
-            <p class="month">{{getCurrentMonth}} {{currentYear}}</p>
+            <div class="monthYear">
+                <span class="month">{{getCurrentMonth}} </span> 
+                <span class="year">{{currentYear}}</span>
+            
+            </div>
             <font-awesome-icon class="prev" v-on:click="getNextMonth" :icon="['fas', 'chevron-right']">
             </font-awesome-icon>
         </div>

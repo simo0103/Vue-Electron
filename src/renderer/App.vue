@@ -17,9 +17,9 @@ import Navigation from './components/Utils/Navigation'
 
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
+  @import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
   * {
-    font-family: 'Ubuntu', sans-serif;;
+    font-family: 'PT Sans', sans-serif;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
