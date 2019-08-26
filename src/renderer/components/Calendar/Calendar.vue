@@ -31,8 +31,8 @@
         <popup 
             v-bind:class="{ open: showModal }" 
             :dayNumber="dayNumberForModal" 
-            :dayName="dayNameForModal"
             :month="monthForModal"
+            :year = "currentYear"
             v-if="showModal" 
             @close="showModal = false">
         </popup>
@@ -50,6 +50,7 @@
         data: function () {
             return {
                 myDate: new Date(),
+                months: require('months'),
                 arrayOfDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 shortDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
                 monthNames: ["January", "February", "March", "April", "May", "June",
@@ -115,7 +116,7 @@
                         key: i,
                         day: this.arrayOfDays[day.getDay() % 7],
                         number: day.getDate(),
-                        month: this.monthNames[day.getMonth()],
+                        month: this.months.abbr[day.getMonth()],
                         holidayName: hd.isHoliday(new Date('"' + day + '"')).name,
                         class: dayClass,
                         numOfDays: numOfDays
@@ -153,7 +154,7 @@
                 this.showModal = true;
                 this.numOfDays = d.numOfDays;
                 this.dayNumberForModal = d.number;
-                this.dayNameForModal = d.day;
+               // this.dayNameForModal = d.day;
                 this.monthForModal = d.month;
                 
             }

@@ -2,14 +2,30 @@
 
     <div id="form">     
         <form>
-            <label for="inOut">Type</label>
-
-            <select name="" id="typeOptions" v-model="selectedType" @change="onChange($event)">
-                <option v-bind:key="type" :value="type" v-for="type in typeOptions" class="option">
-                    {{type}}
-                </option>
-            </select>
-
+            <!-- <input type="radio" v-model="x" value="one">
+            <input type="radio" v-model="x" value="two">
+            
+            <div v-show="x === 'one'">One</div>
+            <div v-show="x === 'two'">Two</div> -->
+            <div>
+                <span 
+                v-bind:key="type" 
+                :value="type" 
+                v-for="type in typeOptions"               
+                >
+                
+                    <input 
+                        type="radio" 
+                        id="radio" 
+                        v-bind:value="type"
+                        v-model="selectedType"
+                        @change="onChange($event)"
+                    >
+                    <label>{{type}}</label>
+                </span>
+            </div>
+         
+ 
             <label for="category">Category</label>
 
             <select id="categoryOptions" v-model="selectedCategory">
@@ -60,6 +76,7 @@
     },
     data () {
         return {
+            x: 'one',
             selectedType: 'income',
             selectedCategory: null,
             price: null,

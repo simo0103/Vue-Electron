@@ -2,12 +2,13 @@
     <div class="overlay" @click.self="$emit('close')">
         <div class="modal">
             <div class="modal-header">
-                <div class="days">
-                    <span>{{dayName}}</span> - 
-                    <span>{{dayNumber}}</span>
-                    <span>{{month}}</span>
-                    
+                <div class="date">
+                    <span class="calendar"><img alt="selectedData" src="../../../svg/calendar.svg"></span>                 
+                    <span class="dNum">{{dayNumber}}</span>
+                    <span class="month">{{month}}</span>
+                    <span class="year">{{year}}</span>                  
                 </div>
+
                 <div>
                     <img alt="close popup" class="close" @click="$emit('close')" src="../../../svg/closeorange.svg"> 
                 </div>
@@ -30,7 +31,8 @@
         'dayNumber',
         'dayName',
         'month',
-        'numOfDays'
+        'numOfDays',
+        'year'
     ],
 
     components: {
@@ -73,7 +75,24 @@
         justify-content: space-between;
         padding: 10px;
         text-transform: uppercase;
-    }
+            .date {
+                display: flex;
+                padding: 15px 25px;
+                border-radius: 50px;
+                align-items: center;
+                color: #afc3cd;
+                font-size: 13px;
+                border: 2px solid #AFC3CD;
+                img {
+                   width: 20px;
+                   margin-right: 10px; 
+                }
+                .dNum, .month {
+                    margin-right: 3px;
+                }
+            }   
+        }
+    
     .close {      
         cursor: pointer;
         width: 25px;
