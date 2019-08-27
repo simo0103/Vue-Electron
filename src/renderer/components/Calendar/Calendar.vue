@@ -7,16 +7,22 @@
 
         <!-- <h2>{{currentData}}</h2> -->
         <div class="nav-calendar">
-            <font-awesome-icon class="prev" v-on:click="getPrevMonth" :icon="['fas', 'chevron-left']">
-            </font-awesome-icon>
+            
+            <div class="changeMonth">
+                <font-awesome-icon class="prev" v-on:click="getPrevMonth" :icon="['fas', 'chevron-left']"></font-awesome-icon>
+                <span>{{getCurrentMonthAbbr}}</span>
+                <span class="year">{{currentYear}}</span>
+                <font-awesome-icon class="prev" v-on:click="getNextMonth" :icon="['fas', 'chevron-right']"></font-awesome-icon>
+            </div>
+          
             <!-- <span>{{currentMonth}}</span> -->
             <div class="monthYear">
                 <span class="month">{{getCurrentMonth}} </span> 
                 <span class="year">{{currentYear}}</span>
             
             </div>
-            <font-awesome-icon class="prev" v-on:click="getNextMonth" :icon="['fas', 'chevron-right']">
-            </font-awesome-icon>
+           
+           
         </div>
         
         <table>
@@ -74,6 +80,11 @@
             getCurrentMonth() {
                 const months = this.monthNames[this.currentMonth - 1];
                 return months;
+            },
+
+            getCurrentMonthAbbr() {
+                const monthsAbbr = this.months.abbr[this.currentMonth - 1];
+                return monthsAbbr;
             },
 
             numberOFdaysInMonth() {
