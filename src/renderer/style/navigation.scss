@@ -1,18 +1,18 @@
 nav {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 20vw;
-    background-color: #252B3B;
-    color: white;
+  
+    background-color: white;
+    color: #A1ABB3;
     ul {
-        margin-top: 15vh;
-        height: inherit;
+        display: flex;
+        justify-content: space-around;
         li {
-            padding: 20px 0;
+            padding: 20px;
             &:hover {
                 cursor: pointer;
-            }        
+            }  
+            &.router-link-active {
+                border-bottom: 1px solid #4A85A8;
+            }      
             svg {
                 margin: 0 15px 0 25px;
             }

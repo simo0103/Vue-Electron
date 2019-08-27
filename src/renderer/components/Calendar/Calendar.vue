@@ -9,10 +9,18 @@
         <div class="nav-calendar">
             
             <div class="changeMonth">
-                <font-awesome-icon class="prev" v-on:click="getPrevMonth" :icon="['fas', 'chevron-left']"></font-awesome-icon>
-                <span>{{getCurrentMonthAbbr}}</span>
-                <span class="year">{{currentYear}}</span>
-                <font-awesome-icon class="prev" v-on:click="getNextMonth" :icon="['fas', 'chevron-right']"></font-awesome-icon>
+                <span class="prev" v-on:click="getPrevMonth">
+                    <font-awesome-icon :icon="['fas', 'chevron-left']"></font-awesome-icon>
+                </span>
+                
+                <div class="wrapper">
+                    <img alt="selectedData" src="../../../svg/calendar.svg">
+                    <span class="month">{{getCurrentMonthAbbr}}</span>
+                    <span class="year">{{currentYear}}</span>
+                </div>
+               <span class="next" v-on:click="getNextMonth">
+                    <font-awesome-icon :icon="['fas', 'chevron-right']"></font-awesome-icon>
+               </span>
             </div>
           
             <!-- <span>{{currentMonth}}</span> -->
@@ -21,6 +29,7 @@
                 <span class="year">{{currentYear}}</span>
             
             </div>
+            
            
            
         </div>
