@@ -53,7 +53,7 @@
 <style lang="scss">
  .overlay.open {
     width: 100%;
-    background: rgba(116, 130, 134, 0.4);
+   
     height: 100%;
     position: absolute;
     top: 0;
@@ -62,14 +62,15 @@
     z-index: 999;
     justify-content: center;
     align-items: center;
-    border-radius: 50px;
 }
 .modal {
     background: #fff;
-    box-shadow: 2px 2px 20px 1px;
-    width: 50vw;
+    -webkit-box-shadow: 0px 10px 62px 44px rgba(212,210,219,0.33);
+    -moz-box-shadow: 0px 10px 62px 44px rgba(212,210,219,0.33);
+    box-shadow: 0px 10px 62px 44px rgba(212,210,219,0.33);    
+    width: 40vw;
     top: 50%;
-    height: 60vh;
+    height: 70vh;
     .modal-header {
         display: flex;
         justify-content: space-between;

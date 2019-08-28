@@ -5,13 +5,14 @@ nav {
     ul {
         display: flex;
         justify-content: space-around;
+        border-bottom: 1px solid #AFC3CD;
         li {
             padding: 20px;
             &:hover {
                 cursor: pointer;
             }  
             &.router-link-active {
-                border-bottom: 1px solid #4A85A8;
+                border-bottom: 2px solid #4A85A8;
             }      
             svg {
                 margin: 0 15px 0 25px;

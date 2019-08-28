@@ -34,7 +34,6 @@ import Navigation from './components/Utils/Navigation'
           rgba(229, 229, 229, .9) 100%
         );
         //radial-gradient(ellipse at top left, #192525 40%, rgba(94, 91, 91, 0.9) 100%);
-      width: 100vw;
-      height: 100vh;
+     
   }
 </style>

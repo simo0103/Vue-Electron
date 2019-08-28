@@ -1,62 +1,66 @@
 <template>
-    <div id="calendar" v-bind:class="{ openModal: showModal }">
-        <div class="nav-title">
-            <h2>CALENDAR</h2>
-            <button>+ Create New Event</button>
-        </div>
-
-        <!-- <h2>{{currentData}}</h2> -->
-        <div class="nav-calendar">
-            
-            <div class="changeMonth">
-                <span class="prev" v-on:click="getPrevMonth">
-                    <font-awesome-icon :icon="['fas', 'chevron-left']"></font-awesome-icon>
-                </span>
-                
-                <div class="wrapper">
-                    <img alt="selectedData" src="../../../svg/calendar.svg">
-                    <span class="month">{{getCurrentMonthAbbr}}</span>
-                    <span class="year">{{currentYear}}</span>
-                </div>
-               <span class="next" v-on:click="getNextMonth">
-                    <font-awesome-icon :icon="['fas', 'chevron-right']"></font-awesome-icon>
-               </span>
+    <div class="caldendar-component">
+          <div class="nav-title">
+                <h2>CALENDAR</h2>
+                <button>+ Create New Event</button>
             </div>
+        <div id="calendar" v-bind:class="{ openModal: showModal }">
           
-            <!-- <span>{{currentMonth}}</span> -->
-            <div class="monthYear">
-                <span class="month">{{getCurrentMonth}} </span> 
-                <span class="year">{{currentYear}}</span>
+
+            <!-- <h2>{{currentData}}</h2> -->
+            <div class="nav-calendar">
+                
+                <div class="changeMonth">
+                    <span class="prev" v-on:click="getPrevMonth">
+                        <font-awesome-icon :icon="['fas', 'chevron-left']"></font-awesome-icon>
+                    </span>
+                    
+                    <div class="wrapper">
+                        <img alt="selectedData" src="../../../svg/calendar.svg">
+                        <span class="month">{{getCurrentMonthAbbr}}</span>
+                        <span class="year">{{currentYear}}</span>
+                    </div>
+                <span class="next" v-on:click="getNextMonth">
+                        <font-awesome-icon :icon="['fas', 'chevron-right']"></font-awesome-icon>
+                </span>
+                </div>
+            
+                <!-- <span>{{currentMonth}}</span> -->
+                <div class="monthYear">
+                    <span class="month">{{getCurrentMonth}} </span> 
+                    <span class="year">{{currentYear}}</span>
+                
+                </div>
+                
+            
             
             </div>
             
-           
-           
+            <table>
+                <tr class="dayName">
+                    <td v-bind:key="day" v-for="day in arrayOfDays" :value="day">{{ day }}</td>
+                </tr>
+                <tr class="dayNumber">
+                    <td v-bind:key="d.key" :class="d.class" @click="showModalFunction(d)" v-for="d in getActualMonthDays">
+                        <span>{{ d.number }}</span>
+                        <span class="holidayName">{{ d.holidayName }}</span>
+
+                    </td>
+                </tr>
+
+            </table>
+            <popup 
+                v-bind:class="{ open: showModal }" 
+                :dayNumber="dayNumberForModal" 
+                :month="monthForModal"
+                :year = "currentYear"
+                v-if="showModal" 
+                @close="showModal = false">
+            </popup>
+
         </div>
-        
-        <table>
-            <tr class="dayName">
-                <td v-bind:key="day" v-for="day in shortDays" :value="day">{{ day }}</td>
-            </tr>
-            <tr class="dayNumber">
-                <td v-bind:key="d.key" :class="d.class" @click="showModalFunction(d)" v-for="d in getActualMonthDays">
-                    <span>{{ d.number }}</span>
-                    <span class="holidayName">{{ d.holidayName }}</span>
-
-                </td>
-            </tr>
-
-        </table>
-        <popup 
-            v-bind:class="{ open: showModal }" 
-            :dayNumber="dayNumberForModal" 
-            :month="monthForModal"
-            :year = "currentYear"
-            v-if="showModal" 
-            @close="showModal = false">
-        </popup>
-
     </div>
+   
 </template>
 
 <script>
