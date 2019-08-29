@@ -27,12 +27,7 @@ import Navigation from './components/Utils/Navigation'
     list-style-type: none;     
   }
   body {
-  background:
-        radial-gradient(
-          ellipse at top left,
-          rgba(255, 255, 255, 1) 40%,
-          rgba(229, 229, 229, .9) 100%
-        );
+  background: #f8f9fb
         //radial-gradient(ellipse at top left, #192525 40%, rgba(94, 91, 91, 0.9) 100%);
      
   }

@@ -1,9 +1,17 @@
 .nav-title {
     display: flex;
     justify-content: space-between;
-    height: 100px;
+    height: 160px;
     align-items: center;
     padding: 0 4%;
+    h2 {
+        text-transform: capitalize;
+    }
+    h3 {
+        color: #8ba0c0;
+        font-weight: lighter;
+
+    }
     button {
         //background-color: #FA8072;
         background-color: #fe5e51;
@@ -33,13 +41,13 @@
             display: flex;
             border-radius: 50px;
             align-items: center;
-            color: #afc3cd;
+            color: #879ebe;
             font-size: 13px;
-            border: 1px solid #AFC3CD;
+            border: 1px solid #879ebe;
             > span {
                 padding: 10px 20px;
                 cursor: pointer;
-                color: #afc3cd;
+                color: #879ebe;
                 font-size: 10px;
                 &.prev{
                     border-right: 1px solid #AFC3CD;
@@ -78,7 +86,7 @@
                 font-weight: bold;
             }
             .year {
-                color: #CCD8E0;
+                color: #a8c2d1;
                 font-size: 16px;
                 margin-top: 5px;
             }
@@ -133,9 +141,10 @@
             }
             &.dayName {
                 //background-color: #36abb5;
-                color: #5f6773;
+                color: #8aa0bf;
                 text-transform: capitalize;
                 font-size: 17px;
+                text-align: center;
             }
             td {
                 flex-grow: 0;

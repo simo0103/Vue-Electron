@@ -1,7 +1,11 @@
 <template>
     <div class="caldendar-component">
           <div class="nav-title">
-                <h2>CALENDAR</h2>
+                <div>
+                    <h2>schedule</h2>
+                    <h3>Schedule for current month</h3>
+                </div>
+                
                 <button>+ Create New Event</button>
             </div>
         <div id="calendar" v-bind:class="{ openModal: showModal }">
