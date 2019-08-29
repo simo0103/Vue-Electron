@@ -19,9 +19,9 @@ export default {
       posts: []
     }
   },
-  mounted () {
-    this.getPosts()
-  },
+  // mounted () {
+  //   this.getPosts()
+  // },
   methods: {
     async getPosts () {
       const response = await PostsService.fetchPosts()
