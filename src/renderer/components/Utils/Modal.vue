@@ -2,21 +2,23 @@
     <div class="overlay" @click.self="$emit('close')">
         <div class="modal">
             <div class="modal-header">
+                <div class="addEvent">
+                    <h2>Add event</h2>
+                    <span>
+                        <img alt="close popup" class="close" @click="$emit('close')" src="../../../svg/closeorange.svg"> 
+                    </span>
+                </div>
+               
                 <div class="date">
                     <span class="calendar"><img alt="selectedData" src="../../../svg/calendar.svg"></span>                 
                     <span class="dNum">{{dayNumber}}</span>
                     <span class="month">{{month}}</span>
                     <span class="year">{{year}}</span>                  
                 </div>
-
-                <div>
-                    <img alt="close popup" class="close" @click="$emit('close')" src="../../../svg/closeorange.svg"> 
-                </div>
+                
             </div>
            
-            <Form></Form>
-                
-                                
+            <Form></Form>                                        
         </div>
     </div>
     
@@ -52,8 +54,7 @@
 </script>
 <style lang="scss">
  .overlay.open {
-    width: 100%;
-   
+    width: 100%;  
     height: 100%;
     position: absolute;
     top: 0;
@@ -72,10 +73,15 @@
     top: 50%;
     height: 70vh;
     .modal-header {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        text-transform: uppercase;
+            .addEvent {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                span {
+                    display: flex;
+                    align-items: center;
+                }
+            }
             .date {
                 display: flex;
                 padding: 15px 25px;
@@ -84,6 +90,7 @@
                 color: #afc3cd;
                 font-size: 13px;
                 border: 2px solid #AFC3CD;
+                width: max-content;
                 img {
                    width: 20px;
                    margin-right: 10px; 

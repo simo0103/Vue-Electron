@@ -34,13 +34,10 @@
                     <span class="month">{{getCurrentMonth}} </span> 
                     <span class="year">{{currentYear}}</span>
                 
-                </div>
-                
-            
-            
+                </div>           
             </div>
             
-            <table>
+            <table class="schedule">
                 <tr class="dayName">
                     <td v-bind:key="day" v-for="day in arrayOfDays" :value="day">{{ day }}</td>
                 </tr>
@@ -190,7 +187,6 @@
                 this.monthForModal = d.month;
                 
             }
-
         }
     }
 </script>
