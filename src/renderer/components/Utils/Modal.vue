@@ -77,6 +77,10 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                height: 80px;
+                background-color: white;
+                border-bottom: 1px solid #AFC3CD;
+
                 span {
                     display: flex;
                     align-items: center;

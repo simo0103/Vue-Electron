@@ -1,19 +1,40 @@
 <template>
 
-    <div id="form">     
+    <div id="form"> 
+        <div class="radio">
+            <span 
+                v-bind:key="event" 
+                :value="event" 
+                v-for="event in eventType">   
+                   
+                          <input 
+                        type="radio" 
+                        id="radio" 
+                        v-bind:value="event"
+                        v-model="eventToShow"
+                        @change="onChange($event)">
+                    <label>{{event}}</label>
+                               
+                  
+                   
+            </span>    
+
+        </div>
         <form>
             <!-- <input type="radio" v-model="x" value="one">
             <input type="radio" v-model="x" value="two">
             
             <div v-show="x === 'one'">One</div>
             <div v-show="x === 'two'">Two</div> -->
-            <div>
+           
+              
+            <!-- <div>
+                <span>Event tipe:</span>
                 <span 
                 v-bind:key="type" 
                 :value="type" 
                 v-for="type in typeOptions"               
-                >
-                
+                >               
                     <input 
                         type="radio" 
                         id="radio" 
@@ -38,11 +59,11 @@
             <input v-model="price" class="price" @keypress="isNumber($event)">
 
             <label for="description">Description</label>
-            <input v-model='description' class="description">
+            <input v-model='description' class="description"> -->
            
         </form>       
         
-        <button @click="addTask">Submit</button>   
+        <!-- <button @click="addTask">Submit</button>   
         <table>
             <tr>
                 <td>Type</td>
@@ -58,25 +79,33 @@
                 <td> {{el.description}} </td>               
             </tr>
         </transition-group> 
-        </table>      
-         
+        </table>       -->
+        <keep-alive>
+            <component v-bind:is="eventToShow"></component>
+        </keep-alive>
     </div>
        
     </template>
     <script>
-   
+    import budget from "./Form_budget"
+    import event from "./Form_event"
+    import appointment from "./Form_appointment"
+
     export default {
     name: 'Form',
 
     components: {
-        
+        budget,
+        event,
+        appointment
     },
     props: {
         inAndOut: {default: function () { return [] }}
     },
     data () {
         return {
-            x: 'one',
+            eventType: ['budget', 'appointment', 'event'],
+            eventToShow: 'budget',
             selectedType: 'income',
             selectedCategory: null,
             price: null,
