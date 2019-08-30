@@ -65,7 +65,7 @@
     align-items: center;
 }
 .modal {
-    background: #fff;
+    background: #fbfcfd;
     -webkit-box-shadow: 0px 10px 62px 44px rgba(212,210,219,0.33);
     -moz-box-shadow: 0px 10px 62px 44px rgba(212,210,219,0.33);
     box-shadow: 0px 10px 62px 44px rgba(212,210,219,0.33);    
@@ -109,21 +109,7 @@
         cursor: pointer;
         width: 25px;
     }
-    form {
-        display: flex;
-        flex-direction: column;
-        width: 80%;
-        margin: auto;
-        label {
-            text-transform: uppercase;
-            color: #868b8d
-        }
-  
-        input {
-            border: 1px solid lightgrey;
-        }
-       
-    }
+    
    
 }
 
