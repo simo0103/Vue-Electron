@@ -1,0 +1,13 @@
+https://www.tutorialspoint.com/sqlite/sqlite_installation.htm
+> download sqlite from https://www.sqlite.org/download.html
+sqlite-dll-win32-x86-3290000.zip
+sqlite-tools-win32-x86-3290000.zip
+
+> unzip in a folder C:\sqlite
+
+> add path to windows user variables 
+
+> in cmd 
+ $C:\>cd sqlite
+ $sqlite3
+ 
