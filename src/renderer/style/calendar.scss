@@ -100,7 +100,6 @@
             display: flex;
             width: 100%;
             border-left: 1px solid lightgray; 
-            border-bottom: 1px solid lightgray;
             
             &.dayNumber {
                 flex-wrap: wrap;
@@ -142,6 +141,7 @@
                 color: #8aa0bf;
                 text-transform: capitalize;
                 font-size: 17px;
+                border-bottom: 1px solid lightgray;
                 text-align: center;
             }
             td {

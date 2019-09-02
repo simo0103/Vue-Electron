@@ -8,16 +8,14 @@
                         <img alt="close popup" class="close" @click="$emit('close')" src="../../../svg/closeorange.svg"> 
                     </span>
                 </div>
-               
-                <div class="date">
-                    <span class="calendar"><img alt="selectedData" src="../../../svg/calendar.svg"></span>                 
-                    <span class="dNum">{{dayNumber}}</span>
-                    <span class="month">{{month}}</span>
-                    <span class="year">{{year}}</span>                  
-                </div>
-                
+                              
             </div>
-           
+            <div class="date">
+                <span class="calendar"><img alt="selectedData" src="../../../svg/calendar.svg"></span>                 
+                <span class="dNum">{{dayNumber}}</span>
+                <span class="month">{{month}}</span>
+                <span class="year">{{year}}</span>                  
+            </div>
             <Form></Form>                                        
         </div>
     </div>
@@ -73,20 +71,23 @@
     top: 50%;
     height: 70vh;
     .modal-header {
+            border-bottom: 1px solid #AFC3CD;
             .addEvent {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 height: 80px;
                 background-color: white;
-                border-bottom: 1px solid #AFC3CD;
-
+                padding: 0 20px;
+              
                 span {
                     display: flex;
                     align-items: center;
                 }
             }
-            .date {
+             
+        }
+    .date {
                 display: flex;
                 padding: 15px 25px;
                 border-radius: 50px;
@@ -102,9 +103,7 @@
                 .dNum, .month {
                     margin-right: 3px;
                 }
-            }   
-        }
-    
+            } 
     .close {      
         cursor: pointer;
         width: 25px;

@@ -38,7 +38,7 @@
         
         <button @click="addTask">Submit</button>  
         <!-- CREARE COMPONENTE E DATABASE!!!! --> 
-        <table>
+        <table class="form-table"
             <tr>
                 <td>Type</td>
                 <td>Category</td>
@@ -135,7 +135,7 @@ export default {
         }
        
     }
-    table tr {
+    table.form-table tr {
         display: flex;
         width: 100%;
         justify-content: space-around;
