@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import db from './db/db.js'
 import Navigation from './components/Utils/Navigation'
   export default {
     name: 'my-wallet',

@@ -28,17 +28,17 @@
             </option>
         </select>
 
-        <label for="price">Amount</label>
-        <input v-model="price" class="price" @keypress="isNumber($event)">
+        <label for="amount">Amount</label>
+        <input v-model="amount" class="amount" @keypress="isNumber($event)">
 
         <label for="description">Description</label>
         <input v-model='description' class="description">
         
     </form>       
         
-        <button @click="addTask">Submit</button>  
+        <button @click="insertInDb">Submit</button>  
         <!-- CREARE COMPONENTE E DATABASE!!!! --> 
-        <table class="form-table"
+        <!-- <table class="form-table">
             <tr>
                 <td>Type</td>
                 <td>Category</td>
@@ -53,16 +53,18 @@
                 <td> {{el.description}} </td>               
             </tr>
         </transition-group> 
-        </table>      
+        </table>       -->
   </div>
 </template>
 
 <script>
+
+import db from '../../db/db'
 export default {
      name: 'Form_budget',
      components: {
-
-     },
+         db
+    },
       props: {
         inAndOut: {default: function () { return [] }}
     },
@@ -71,7 +73,7 @@ export default {
           
             selectedType: 'income',
             selectedCategory: null,
-            price: null,
+            amount: null,
             description: null,
             categoryArray: ['salary', 'gift', 'refound'],
             typeOptions: ['income', 'expense'],
@@ -81,32 +83,50 @@ export default {
         }
     },
     methods: {
-       onChange(event) {
+        onChange(event) {
   
             if(this.selectedType == 'expense') {
                 this.categoryArray = this.outArray.slice(0)
             } else if(this.selectedType == 'income') {
                 this.categoryArray = this.inArray.slice(0)
             }       
-       },
+        },
 
-       addTask() {
-            if(this.selectedCategory && this.selectedType && this.price) {
-                this.inAndOut.push({
-                type: this.selectedType,
-                category: this.selectedCategory,
-                amount: this.price,
-                description: this.description
-                })
-                this.selectedCategory = '',
-                this.selectedType = '';
-                this.price = '';
-                this.description = '';
-           }
+        // addTask() {
+        //     if(this.selectedCategory && this.selectedType && this.amount) {
+        //         this.inAndOut.push({
+        //         type: this.selectedType,
+        //         category: this.selectedCategory,
+        //         amount: this.amount,
+        //         description: this.description
+        //         })
+        //         this.selectedCategory = '',
+        //         this.selectedType = '';
+        //         this.amount = '';
+        //         this.description = '';
+        //     }
            
-       },
+        // },
+        insertInDb() {
+            const sqlite3 = require('sqlite3').verbose();
+            const path = require("path");
+            const dbPath = path.resolve(__dirname,"/Wallet.db")
+            let db = new sqlite3.Database(dbPath)
+            if(this.selectedType == 'income') {
+                if(this.selectedCategory && this.amount) { 
+                    db
+                    .run( `INSERT INTO income(category, description, amount) VALUES  ('categoria', 'descrizione', '222')`)
+                    .each(`SELECT category FROM income`, (err, row) => {
+                        if (err){
+                            throw err;
+                        }
+                        console.log(row.category);
+                    });
+                }
+            }
+        },
 
-       isNumber(evt) {
+        isNumber(evt) {
             evt = (evt) ? evt : window.event;
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
@@ -114,7 +134,7 @@ export default {
             } else {
                 return true;
             }
-       }
+        }
     }
 }
 </script>
