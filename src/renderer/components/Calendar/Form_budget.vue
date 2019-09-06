@@ -110,12 +110,15 @@ export default {
         insertInDb() {
             const sqlite3 = require('sqlite3').verbose();
             const path = require("path");
-            const dbPath = path.resolve(__dirname,"/Wallet.db")
-            let db = new sqlite3.Database(dbPath)
+            const dbPath = path.resolve(__dirname,"/Wallet.db");
+            let db = new sqlite3.Database(dbPath);
             if(this.selectedType == 'income') {
                 if(this.selectedCategory && this.amount) { 
                     db
-                    .run( `INSERT INTO income(category, description, amount) VALUES  ('categoria', 'descrizione', '222')`)
+                    .run('INSERT INTO income(category, description, amount) VALUES ("'
+                        + this.selectedCategory + '","' 
+                        + this.description + '",' 
+                        + this.amount  +')')
                     .each(`SELECT category FROM income`, (err, row) => {
                         if (err){
                             throw err;
