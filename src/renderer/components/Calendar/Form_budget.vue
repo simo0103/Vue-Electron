@@ -70,7 +70,6 @@ export default {
     },
     data () {
         return {
-          
             selectedType: 'income',
             selectedCategory: null,
             amount: null,
@@ -110,23 +109,24 @@ export default {
         insertInDb() {
             const sqlite3 = require('sqlite3').verbose();
             const path = require("path");
-            const dbPath = path.resolve(__dirname,"/Wallet.db");
+            const dbPath = path.resolve(__dirname,"/Wallet.db.sqlite");
             let db = new sqlite3.Database(dbPath);
-            if(this.selectedType == 'income') {
-                if(this.selectedCategory && this.amount) { 
-                    db
-                    .run('INSERT INTO income(category, description, amount) VALUES ("'
-                        + this.selectedCategory + '","' 
-                        + this.description + '",' 
-                        + this.amount  +')')
-                    .each(`SELECT category FROM income`, (err, row) => {
-                        if (err){
-                            throw err;
-                        }
-                        console.log(row.category);
-                    });
-                }
+           
+            if(this.selectedCategory && this.amount) { 
+                db
+                .run('INSERT INTO budget(type, category, description, amount) VALUES ("'
+                    + this.selectedType + '","' 
+                    + this.selectedCategory + '","' 
+                    + this.description + '",' 
+                    + this.amount  +')')
+                .each(`SELECT * FROM budget`, (err, row) => {
+                    if (err){
+                        throw err;
+                    }
+                    console.log(row);
+                })
             }
+            
         },
 
         isNumber(evt) {
