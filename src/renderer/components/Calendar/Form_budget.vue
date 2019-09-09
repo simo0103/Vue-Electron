@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form>
+    <form @submit.prevent="insertInDb">
             
         <div>
             <span>Event tipe:</span>
@@ -33,27 +33,27 @@
 
         <label for="description">Description</label>
         <input v-model='description' class="description">
-        
+        <button>Submit</button>  
+
     </form>       
         
-        <button @click="insertInDb">Submit</button>  
         <!-- CREARE COMPONENTE E DATABASE!!!! --> 
-        <!-- <table class="form-table">
+        <table class="form-table">
             <tr>
                 <td>Type</td>
                 <td>Category</td>
                 <td>Amount</td>
                 <td>Description</td>
             </tr>
-        <transition-group name="fade" tag="tbody">
-            <tr v-bind:key="`el-${index}`" :class="selectedType == 'expense' ? 'expense' : 'income'" v-for="(el, index) in inAndOut">
-                <td> {{el.type}} </td>
-                <td> {{el.category}} </td>
-                <td> {{el.amount}} </td> 
-                <td> {{el.description}} </td>               
-            </tr>
-        </transition-group> 
-        </table>       -->
+            <transition-group name="fade" tag="tbody">
+                <tr v-bind:key="`el-${index}`" :class="selectedType == 'expense' ? 'expense' : 'income'" v-for="(el, index) in inAndOut">
+                    <td> {{el.type}} </td>
+                    <td> {{el.category}} </td>
+                    <td> {{el.amount}} </td> 
+                    <td> {{el.description}} </td>               
+                </tr>
+            </transition-group> 
+        </table>      
   </div>
 </template>
 
@@ -78,7 +78,6 @@ export default {
             typeOptions: ['income', 'expense'],
             inArray: ['salary', 'gift', 'refound'],
             outArray: ['food & drinks', 'pet', 'shopping'],
-
         }
     },
     methods: {
@@ -91,42 +90,31 @@ export default {
             }       
         },
 
-        // addTask() {
-        //     if(this.selectedCategory && this.selectedType && this.amount) {
-        //         this.inAndOut.push({
-        //         type: this.selectedType,
-        //         category: this.selectedCategory,
-        //         amount: this.amount,
-        //         description: this.description
-        //         })
-        //         this.selectedCategory = '',
-        //         this.selectedType = '';
-        //         this.amount = '';
-        //         this.description = '';
-        //     }
-           
-        // },
         insertInDb() {
             const sqlite3 = require('sqlite3').verbose();
             const path = require("path");
             const dbPath = path.resolve(__dirname,"/Wallet.db.sqlite");
             let db = new sqlite3.Database(dbPath);
-           
-            if(this.selectedCategory && this.amount) { 
+      
+            if(this.selectedCategory && this.amount && this.selectedType) { 
                 db
                 .run('INSERT INTO budget(type, category, description, amount) VALUES ("'
                     + this.selectedType + '","' 
                     + this.selectedCategory + '","' 
                     + this.description + '",' 
-                    + this.amount  +')')
-                .each(`SELECT * FROM budget`, (err, row) => {
-                    if (err){
-                        throw err;
-                    }
-                    console.log(row);
-                })
-            }
-            
+                    + this.amount  +')');
+                    this.inAndOut.push({
+                        type: this.selectedType,
+                        category: this.selectedCategory,
+                        amount: this.amount,
+                        description: this.description
+                    })     
+                    this.selectedCategory = '',
+                    this.selectedType = '';
+                    this.amount = '';
+                    this.description = '';        
+            } 
+
         },
 
         isNumber(evt) {

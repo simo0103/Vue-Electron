@@ -18,14 +18,13 @@ db.serialize(() => {
 
   db
     .run('CREATE TABLE IF NOT EXISTS budget (type TEXT, category TEXT, description TEXT, amount INTEGER )')
-
+    //.run('DELETE FROM budget')
     .each(`SELECT rowid, * FROM budget`, (err, row) => {
           if (err){
               throw err;
           }
           console.log(row);
     })
-    
 });
  
 // close the database connection
