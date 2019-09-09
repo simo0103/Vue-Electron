@@ -34,7 +34,7 @@ export default {
     },
     data () {
         return {
-           
+           dataInDB : []
         }
     },
     computed: {
@@ -45,19 +45,18 @@ export default {
         const dbPath = path.resolve(__dirname,"/Wallet.db.sqlite");
         let db = new sqlite3.Database(dbPath);  
         var array = [];       
-        db.each(`SELECT * FROM budget`, [], (err, row) => {
+        db.all(`SELECT * FROM budget`, [], (err, row) => {
           if (err){
               throw err;
           }
-          console.log(row);              
-            array.push({
-                type: row.type,
-                category: row.category,
-                amount: row.amount,
-                description: row.description
-            })     
+        
+          this.dataInDB = row
+             
+              
         })
-        return array;
+       
+        return this.dataInDB
+       
       },
     }
 }
