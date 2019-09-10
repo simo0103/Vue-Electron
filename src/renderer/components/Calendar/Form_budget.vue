@@ -29,7 +29,7 @@
         </select>
 
         <label for="amount">Amount</label>
-        <input v-model="amount" class="amount" @keypress="isNumber($event)">
+        <input v-model.number="amount" class="amount" placeholder='0.00' @keypress="isNumber($event)">
 
         <label for="description">Description</label>
         <input v-model='description' class="description">
@@ -42,15 +42,15 @@
             <tr>
                 <td>Type</td>
                 <td>Category</td>
-                <td>Amount</td>
                 <td>Description</td>
+                <td>Amount</td>
             </tr>
             <transition-group name="fade" tag="tbody">
                 <tr v-bind:key="`el-${index}`" :class="selectedType == 'expense' ? 'expense' : 'income'" v-for="(el, index) in inAndOut">
                     <td> {{el.type}} </td>
                     <td> {{el.category}} </td>
-                    <td> {{el.amount}} </td> 
-                    <td> {{el.description}} </td>               
+                    <td> {{el.description}} </td>  
+                    <td> {{el.amount.toLocaleString()}} </td>              
                 </tr>
             </transition-group> 
         </table>      
@@ -102,17 +102,17 @@ export default {
                     + this.selectedType + '","' 
                     + this.selectedCategory + '","' 
                     + this.description + '",' 
-                    + this.amount  +')');
+                    + this.amount +')');
                     this.inAndOut.push({
                         type: this.selectedType,
                         category: this.selectedCategory,
-                        amount: this.amount,
-                        description: this.description
+                        description: this.description,
+                        amount: this.amount
                     })     
                     this.selectedCategory = '',
                     this.selectedType = '';
-                    this.amount = '';
                     this.description = '';        
+                    this.amount = '';
             } 
 
         },
@@ -121,7 +121,7 @@ export default {
             evt = (evt) ? evt : window.event;
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-                evt.preventDefault();;
+                evt.preventDefault();
             } else {
                 return true;
             }

@@ -23,7 +23,7 @@ db.serialize(() => {
           if (err){
               throw err;
           }
-          console.log(row);
+        //  console.log(row);
     })
 });
  

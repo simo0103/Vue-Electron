@@ -1,23 +1,27 @@
 <template>
-  <div> 
-       
-        <table class="form-table">
-            <tr>
+  <div>      
+        <table class="recap-table">
+            <tr class="columnName">
                 <td>Type</td>
                 <td>Category</td>
-                <td>Amount</td>
                 <td>Description</td>
+                <td>Amount</td>
             </tr>
            
         
-            <tr v-bind:key="`el-${index}`" v-for="(el, index) in selectFromDb">
+            <!-- <tr v-bind:key="el.rowid"  v-for="el in getData">
                 <td> {{el.type}} </td>
                 <td> {{el.category}} </td>
-                <td> {{el.amount}} </td> 
-                <td> {{el.description}} </td>               
+                <td> {{el.description}} </td>  
+                <td> {{el.amount}} </td>              
+            </tr> -->
+            <tr>
+                <td>Total Income</td>
+                <td></td>
+                <td></td>               
+                <td>{{getToltalIncome}}</td> 
             </tr>
-
-        </table>      
+        </table>     
   </div>
 </template>
 
@@ -30,43 +34,59 @@ export default {
          db
     },
       props: {
-
+       
     },
     data () {
         return {
-           dataInDB : []
         }
     },
     computed: {
 
-      selectFromDb() {
+      // getData() {
+      //   const sqlite3 = require('sqlite3').verbose();
+      //   const path = require("path");
+      //   const dbPath = path.resolve(__dirname,"/Wallet.db.sqlite");
+      //   let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE); 
+      //   var data = null;
+      //   db.each(`SELECT rowid, * FROM budget`, (err, rows) => {
+      //       if(err != null) {
+      //           return err;
+      //       } else {
+      //          console.log(rows);
+      //         data = rows
+      //       }
+            
+         
+      //   });
+      //   console.log(data)
+      //   return data;
+      // },
+
+      getToltalIncome() {
         const sqlite3 = require('sqlite3').verbose();
         const path = require("path");
         const dbPath = path.resolve(__dirname,"/Wallet.db.sqlite");
         let db = new sqlite3.Database(dbPath);  
-        var array = [];       
-        db.all(`SELECT * FROM budget`, [], (err, row) => {
-          if (err){
-              throw err;
-          }
-        
-          this.dataInDB = row
-             
-              
+        var totIncome = '';
+    
+        db.serialize(() => {
+          db.get("SELECT SUM(amount) AS totale FROM budget WHERE type = 'income'", (err, row) => {
+            console.log(row)
+            totIncome = row.totale
+            
+          })
+          db.close();
         })
-       
-        return this.dataInDB
-       
-      },
+        return totIncome;
+      }
     }
 }
 </script>
 
 <style lang="scss">
 
-    table.form-table tr {
-        display: flex;
+    table.recap-table {
+       
         width: 100%;
-        justify-content: space-around;
     }
 </style>
