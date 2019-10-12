@@ -3,7 +3,7 @@ const path = require("path");
 const dbPath = path.resolve(__dirname,"/Wallet.db.sqlite")
  
 // open the database connection
-let db = new sqlite3.Database(dbPath, (err) => {
+let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
     console.error(err.message);
   }

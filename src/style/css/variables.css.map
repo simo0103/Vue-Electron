@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../../renderer/style/partials/variables.scss"
+    ],
+    "names": [],
+    "file": "variables.css"
+}

@@ -2,8 +2,7 @@
   <div>
     <form @submit.prevent="insertInDb">
             
-        <div>
-            <span>Event tipe:</span>
+        <div class="form-element">
             <span 
             v-bind:key="type" 
             :value="type" 
@@ -19,27 +18,29 @@
                 <label>{{type}}</label>
             </span>
         </div>
-        
-        <label for="category">Category</label>
-
-        <select id="categoryOptions" v-model="selectedCategory">
-            <option v-bind:key="category"  :value="category" v-for="category in categoryArray" class="option">
-                {{category}}
-            </option>
-        </select>
-
-        <label for="amount">Amount</label>
-        <input v-model.number="amount" class="amount" placeholder='0.00' @keypress="isNumber($event)">
-
-        <label for="description">Description</label>
-        <input v-model='description' class="description">
+        <div class="el">
+            <label for="category">Category</label>
+            <select id="categoryOptions" v-model="selectedCategory">
+                <option v-bind:key="category"  :value="category" v-for="category in categoryArray" class="option">
+                    {{category}}
+                </option>
+            </select>
+        </div>
+        <div class="el">
+            <label for="amount">Amount</label>
+            <input v-model.number="amount" class="amount" placeholder='0.00' @keypress="isNumber($event)">
+        </div>
+        <div class="el">
+            <label for="description">Description</label>
+            <input v-model='description' class="description">
+        </div>
         <button>Submit</button>  
 
     </form>       
         
         <!-- CREARE COMPONENTE E DATABASE!!!! --> 
         <table class="form-table">
-            <tr>
+            <tr class="title">
                 <td>Type</td>
                 <td>Category</td>
                 <td>Description</td>
@@ -94,7 +95,7 @@ export default {
             const sqlite3 = require('sqlite3').verbose();
             const path = require("path");
             const dbPath = path.resolve(__dirname,"/Wallet.db.sqlite");
-            let db = new sqlite3.Database(dbPath);
+            let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE);
       
             if(this.selectedCategory && this.amount && this.selectedType) { 
                 db
@@ -131,24 +132,45 @@ export default {
 </script>
 
 <style lang="scss">
-  form {
+form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    > .form-element {
+        display: flex;
+        justify-content: space-between;
+    }
+    .el {
         display: flex;
         flex-direction: column;
-        width: 80%;
-        margin: auto;
-        label {
-            text-transform: capitalize;
-            color: #868b8d
-        }
-  
-        input {
-            border: 1px solid lightgrey;
-        }
+        padding: 10px 0;
+    }
+    label {
+        text-transform: capitalize;
+        color: #868b8d
+    }
+
+    input {
+        border: 1px solid lightgrey;
+    }
        
-    }
-    table.form-table tr {
+}
+table {
+    width: 80%;
+    margin: 0 auto;
+    .title {
         display: flex;
-        width: 100%;
-        justify-content: space-around;
     }
+    tr {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    td {
+        flex-grow: 0;
+        flex: 0 1 calc(100% / 4);
+        border-right: 1px solid lightgray;
+        text-align: center;
+    }
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="wrapper">
     <main>
-     <h1>HOME</h1>
+     <h1>DASHBOARD</h1>
     </main>
   </div>
 </template>

@@ -72,6 +72,7 @@
     height: 70vh;
     .modal-header {
             border-bottom: 1px solid #AFC3CD;
+            margin-bottom: 10px;
             .addEvent {
                 display: flex;
                 justify-content: space-between;
@@ -89,7 +90,7 @@
         }
     .date {
                 display: flex;
-                padding: 15px 25px;
+                padding: 10px 25px;
                 border-radius: 50px;
                 align-items: center;
                 color: #afc3cd;

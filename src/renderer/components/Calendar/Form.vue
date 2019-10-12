@@ -1,7 +1,9 @@
 <template>
 
     <div id="form"> 
+        
         <div class="radio">
+            <span>Event tipe:</span>
             <span 
                 v-bind:key="event" 
                 :value="event" 

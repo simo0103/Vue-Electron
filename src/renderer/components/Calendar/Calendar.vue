@@ -123,7 +123,7 @@
 
                 var today = this.myDate,
                     Holidays = require('date-holidays'),
-                    hd = new Holidays('IT'),
+                    hd = new Holidays('US'),
                     currentYearHolidays = hd.getHolidays(this.currentYear),
                     numOfDays = new Date(this.currentYear, this.currentMonth, 0).getDate(),
                     array = [];
